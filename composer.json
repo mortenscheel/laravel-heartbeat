@@ -1,7 +1,7 @@
 {
     "name": "mortenscheel/laravel-heartbeat",
     "description": "Monitor Laravel queue performance",
-    "license": "license",
+    "license": "MIT",
     "authors": [
         {
             "name": "Morten Scheel",
