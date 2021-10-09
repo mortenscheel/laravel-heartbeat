@@ -13,13 +13,14 @@ class MonitorHeartbeatCommand extends Command
      * The name and signature of the console command.
      * @var string
      */
-    protected $signature = 'heartbeat:monitor';
+    protected $signature = 'heartbeat:monitor {--no-dispatch : Do not dispatch heartbeat jobs}
+                                              {--no-warn     : Do not send e-mail warnings}';
 
     /**
      * The console command description.
      * @var string
      */
-    protected $description = 'Dispatch and monitor heartbeats';
+    protected $description = 'Dispatch and monitor queue heartbeats';
 
     /**
      * Execute the console command.
@@ -31,13 +32,15 @@ class MonitorHeartbeatCommand extends Command
             $this->warn('Heartbeat is not enabled');
             return 1;
         }
-        $monitor->dispatchHeartbeatJobs();
+        if (!$this->option('no-dispatch')) {
+            $monitor->dispatchHeartbeatJobs();
+        }
         $heartbeats = $monitor->getLatestHeartbeats();
         $this->renderHeartbeatsTable($heartbeats);
         $unhealthy = $heartbeats->filter(function (Heartbeat $heartbeat) {
             return !$heartbeat->isHealthy();
         });
-        if ($unhealthy->isNotEmpty()) {
+        if ($unhealthy->isNotEmpty() && !$this->option('no-warn')) {
             $monitor->warnRecipients($unhealthy);
         }
         return 0;
