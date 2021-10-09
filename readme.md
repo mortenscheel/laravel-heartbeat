@@ -2,8 +2,6 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
-[![StyleCI][ico-styleci]][link-styleci]
 
 A simple way to detect when your queue workers are hanging or can't keep up.
 
@@ -69,7 +67,20 @@ Enable heartbeat detection by adding the following variable to `.env`:
 ```
 HEARTBEAT_ENABLED=true
 ```
+If Laravel's Scheduler is running via cron, the `heartbeat:monitor` command will run automatically every minute.
 
+To see the current status of queue heartbeats, you can run `heartbeat:monitor` manually in the console:
+```bash
+$ php artisan heartbeat:monitor
++---------+----------------+-------------+
+| Queue   | Last heartbeat | Max allowed |
++---------+----------------+-------------+
+| default | 1 minute ago   | 2 minutes   |
+| high    | 1 minute ago   | 2 minutes   |
+| low     | 1 minute ago   | 3 minutes   |
+| encode  | 2 minutes ago  | 30 minutes  |
++---------+----------------+-------------+
+```
 
 ## Change log
 
@@ -98,14 +109,10 @@ If you discover any security related issues, please email morten@mortenscheel.co
 
 license. Please see the [license file](license.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/mortenscheel/heartbeat.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/mortenscheel/heartbeat.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/mortenscheel/heartbeat/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
+[ico-version]: https://img.shields.io/packagist/v/mortenscheel/laravel-heartbeat.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/mortenscheel/laravel-heartbeat.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/mortenscheel/heartbeat
-[link-downloads]: https://packagist.org/packages/mortenscheel/heartbeat
-[link-travis]: https://travis-ci.org/mortenscheel/heartbeat
-[link-styleci]: https://styleci.io/repos/12345678
+[link-packagist]: https://packagist.org/packages/mortenscheel/laravel-heartbeat
+[link-downloads]: https://packagist.org/packages/mortenscheel/laravel-heartbeat
 [link-author]: https://github.com/mortenscheel
 [link-contributors]: ../../contributors
