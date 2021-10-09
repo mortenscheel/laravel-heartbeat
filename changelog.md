@@ -2,7 +2,6 @@
 
 All notable changes to `Heartbeat` will be documented in this file.
 
-## Version 1.0
+## Version 0.9
 
-### Added
-- Everything
+Initial release

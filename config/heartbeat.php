@@ -1,7 +1,7 @@
 <?php
 return [
     /*
-     * When enabled, Laravel's sceduler will run the heartbeat:monitor
+     * When enabled, Laravel's scheduler will run the heartbeat:monitor
      * command every minute, which will:
      * 1. Dispatch heartbeat jobs on the configured queues.
      * 2. Send an email to the configured recipients if a
