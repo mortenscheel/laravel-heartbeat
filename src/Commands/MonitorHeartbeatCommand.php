@@ -50,13 +50,10 @@ class MonitorHeartbeatCommand extends Command
     {
         $headers = ['Queue', 'Last heartbeat', 'Max allowed'];
         $rows = $heartbeats->map(function (Heartbeat $heartbeat) {
+            $message = sprintf('<fg=%s>%s</>', ($heartbeat->isHealthy() ? 'green' : 'red'), $heartbeat->diffForHumans());
             return [
                 $heartbeat->getQueue(),
-                sprintf(
-                    '<fg=%s>%s</>',
-                    $heartbeat->isHealthy() ? 'green' : 'red',
-                    $heartbeat->diffForHumans(),
-                ),
+                $message,
                 $heartbeat->maxTimeForHumans()
             ];
         });
